@@ -7,21 +7,19 @@ import { MatSelect } from '@angular/material/select';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent {
 
-  @Input() label: string;
-  @Input() placeholder?: string;
-  @Input() options: string[];
-  @Input() disabled?: boolean;
-  @Input() selected?: string[];
-  @Output() onSelect = new EventEmitter();
+  @Input() public label: string;
+  @Input() public placeholder?: string;
+  @Input() public options: string[];
+  @Input() public disabled?: boolean;
+  @Input() public selected?: string[];
+  @Output() public onSelect = new EventEmitter();
 
   @ViewChild('allSelected') private allSelected: MatOption;
-  @ViewChild('select') select: MatSelect;
+  @ViewChild('select') private select: MatSelect;
 
   constructor() { }
-
-  ngOnInit(): void {}
 
   public toggleAllSelection(): void {
     this.onSelect.emit(['all']);

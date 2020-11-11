@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class FactCardComponent {
 
-  @Input() text: string;
+  @Input() public text: string;
+  @Input() public bg?: string;
 
   constructor() { }
 

@@ -1,14 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FactsService } from '../../services/facts.service';
-import { IJoke } from '../../models/joke.model';
-
-const compare = (a: string, b: string, isAsc: boolean) => {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-};
+import { FilterFunction, IJoke } from '../../models/joke.model';
 
 @Component({
   selector: 'app-search',
@@ -28,23 +24,21 @@ const compare = (a: string, b: string, isAsc: boolean) => {
   ],
 })
 
-export class SearchComponent implements OnInit {
+export class SearchComponent {
 
-  search: string;
-  displayedColumns: string[] = ['id', 'category', 'date'];
-  dataSource: MatTableDataSource<IJoke>;
-  expandedElement: IJoke | null;
-  activeFiltersMap: { key: string, value: boolean } | {} = {};
-  idFilter: string;
-  categoryFilter: string;
-  dateFilter: string;
+  public search: string;
+  public displayedColumns: string[] = ['id', 'category', 'date'];
+  public dataSource: MatTableDataSource<IJoke>;
+  public expandedElement: IJoke | null;
+  public activeFiltersMap: { key: string, value: boolean } | {} = {};
+  public idFilter: string;
+  public categoryFilter: string;
+  public dateFilter: string;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) private paginator: MatPaginator;
+  @ViewChild(MatSort) private sort: MatSort;
 
   constructor(private service: FactsService) { }
-
-  ngOnInit(): void {}
 
   public getJokes(): void {
     this.service.getJokes(this.search).subscribe(res => {
@@ -55,18 +49,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  private getSortedData(data: IJoke[]): IJoke[] {
-    if (this.sort.active !== 'Date created' || this.sort.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      const isAsc = this.sort.direction === 'asc';
-      return compare(a.created_at, b.created_at, isAsc);
-    });
-  }
-
-  sortedData($event: Sort): void {
+  public sortedData($event: Sort): void {
     this.dataSource.data = this.getSortedData(this.dataSource.data);
   }
 
@@ -74,13 +57,27 @@ export class SearchComponent implements OnInit {
     this.activeFiltersMap[key] = !this.activeFiltersMap[key];
   }
 
-
-  applyFilter(): void {
+  public applyFilter(): void {
     this.idFilter = this.idFilter || '';
     this.categoryFilter = this.categoryFilter || '';
     this.dateFilter = this.dateFilter || '';
     const filterValue = this.idFilter + '$' + this.categoryFilter + '$' + this.dateFilter;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private compare(a: string, b: string, isAsc: boolean): number {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  private getSortedData(data: IJoke[]): IJoke[] {
+    if (this.sort.active !== 'date' || this.sort.direction === '') {
+      return data;
+    }
+
+    return data.sort((a, b) => {
+      const isAsc = this.sort.direction === 'asc';
+      return this.compare(a.created_at, b.created_at, isAsc);
+    });
   }
 
   private getDateString(date): string {
@@ -94,7 +91,7 @@ export class SearchComponent implements OnInit {
     return `${month} ${day}, ${year} ${hour}:${minute} ${dayPeriod}`.toLowerCase();
   }
 
-  getFilterPredicate(): any {
+  private getFilterPredicate(): FilterFunction {
     return (row: IJoke, filters: string) => {
       const filterArray = filters.split('$');
       const idFilter = filterArray[0];

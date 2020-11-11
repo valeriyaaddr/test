@@ -1,6 +1,5 @@
 <div class="layout-row justify-between search-block">
-  <app-input
-    label="Key world(s)">
+  <app-input label="Key world(s)">
     <input
       type="text"
       placeholder="e.g. Broken"
@@ -70,7 +69,7 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="element-detail"
              [@collapseAnimation]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <app-fact-card [@collapseAnimation] *ngIf="element == expandedElement" [text]="element.value"></app-fact-card>
+          <app-fact-card [@collapseAnimation] *ngIf="element == expandedElement" [text]="element.value" bg="#f0f4f7"></app-fact-card>
         </div>
       </td>
     </ng-container>

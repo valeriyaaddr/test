@@ -10,9 +10,9 @@ import { IJoke } from '../../models/joke.model';
 })
 export class RandomComponent implements OnInit {
 
-  form: FormGroup;
-  options: string[];
-  joke: IJoke;
+  public form: FormGroup;
+  public options: string[];
+  public joke: IJoke;
 
   constructor(private fb: FormBuilder, private service: FactsService) { }
 

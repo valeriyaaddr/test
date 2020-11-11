@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-switch-button',
@@ -7,8 +7,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class SwitchButtonComponent {
 
-  @Input() mode: string;
-  @Output() onClick = new EventEmitter();
+  @Input() public mode: string;
+  @Output() public onClick = new EventEmitter();
 
   constructor() { }
 

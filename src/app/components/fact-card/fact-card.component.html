@@ -1,5 +1,9 @@
 <div class="card-container">
-  <mat-icon class="top-quote-icon">format_quote</mat-icon>
+  <div class="layout-row align-center justify-center top-quote-icon" [ngStyle]="{'background': bg || '#ffffff'}">
+    <mat-icon>format_quote</mat-icon>
+  </div>background
   {{text}}
-  <mat-icon class="bottom-quote-icon">format_quote</mat-icon>
+  <div class="layout-row align-center justify-center bottom-quote-icon" [ngStyle]="{'background': bg || '#ffffff'}">
+    <mat-icon>format_quote</mat-icon>
+  </div>
 </div>

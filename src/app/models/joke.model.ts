@@ -8,3 +8,5 @@ export interface IJoke {
   url: string;
   value: string;
 }
+
+export type FilterFunction = (row: IJoke, filters: string) => boolean;
