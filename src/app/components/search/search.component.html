@@ -1,0 +1,87 @@
+<div class="layout-row justify-between search-block">
+  <app-input
+    label="Key world(s)">
+    <input
+      type="text"
+      placeholder="e.g. Broken"
+      [(ngModel)]="search"
+    >
+  </app-input>
+  <app-button [minWidth]="150" [disabled]="!search" (onClick)="getJokes()">GO!</app-button>
+</div>
+
+<div *ngIf="dataSource" class="table-container">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort (matSortChange)="sortedData($event)">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="layout-row align-center search-cell">
+          <div>ID</div>
+          <mat-icon (click)="setActiveFilter('id')">filter_alt</mat-icon>
+          <app-input *ngIf="activeFiltersMap['id']">
+            <input
+              type="text"
+              [(ngModel)]="idFilter"
+              (keyup)="applyFilter()"
+            >
+          </app-input>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let joke"> {{joke.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="layout-row align-center search-cell">
+          <div>Category</div>
+          <mat-icon (click)="setActiveFilter('category')">filter_alt</mat-icon>
+          <app-input *ngIf="activeFiltersMap['category']">
+            <input
+              type="text"
+              [(ngModel)]="categoryFilter"
+              (keyup)="applyFilter()"
+            >
+          </app-input>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let joke"> {{joke.categories.join(',')}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="layout-row align-center search-cell">
+          <div>Date created</div>
+          <mat-icon (click)="setActiveFilter('date')">filter_alt</mat-icon>
+        </div>
+        <div>
+          <app-input *ngIf="activeFiltersMap['date']">
+            <input
+              type="text"
+              [(ngModel)]="dateFilter"
+              (keyup)="applyFilter()"
+            >
+          </app-input>
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let joke"> {{joke.created_at | date: 'MMM d, y hh:mm a'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="element-detail"
+             [@collapseAnimation]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <app-fact-card [@collapseAnimation] *ngIf="element == expandedElement" [text]="element.value"></app-fact-card>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+</div>

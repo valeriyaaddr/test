@@ -1,0 +1,12 @@
+@import "src/assets/styles/variables";
+
+.container {
+  margin: 20px 0;
+}
+
+.active {
+  ::ng-deep button {
+    background-color: $orange !important;
+    color: $white !important;
+  }
+}

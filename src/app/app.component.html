@@ -1,0 +1,6 @@
+<section>
+  <div class="img-block"></div>
+  <app-switch-button [mode]="mode" (onClick)="switchMode($event)"></app-switch-button>
+  <app-random *ngIf="mode === 'random'"></app-random>
+  <app-search *ngIf="mode === 'search'"></app-search>
+</section>

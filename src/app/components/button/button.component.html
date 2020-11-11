@@ -1,0 +1,9 @@
+<button
+  class="button-main"
+  [disabled]="disabled"
+  (click)="onClick.emit()"
+  [ngStyle]="{ 'min-width': minWidth + 'px' || 'auto' }"
+>
+  <ng-content></ng-content>
+</button>
+

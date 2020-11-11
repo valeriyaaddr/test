@@ -1,0 +1,22 @@
+<form
+  class="layout-row justify-between"
+  [formGroup]="form"
+>
+  <app-input
+    label="Your name">
+    <input
+      type="text"
+      placeholder="e.g. Chuck Norris"
+      formControlName="name">
+  </app-input>
+  <app-select
+    label="Category"
+    placeholder="Pick category"
+    [options]="options"
+    [selected]="form.get('category').value"
+    (onSelect)="setCategory($event)"
+  ></app-select>
+  <app-button [minWidth]="150" [disabled]="form.invalid" (onClick)="getJoke()">GO!</app-button>
+</form>
+
+<app-fact-card *ngIf="joke" [text]="joke.value"></app-fact-card>

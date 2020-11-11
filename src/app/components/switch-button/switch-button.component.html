@@ -1,0 +1,16 @@
+<div class="container layout-row align-center justify-center">
+  <div class="layout-row align-center">
+    <app-button
+      class="switch-button"
+      [minWidth]="100"
+      [class.active]="mode === 'random'"
+      (onClick)="onClick.emit('random')"
+    >Random</app-button>
+    <app-button
+      class="switch-button"
+      [minWidth]="100"
+      [class.active]="mode === 'search'"
+      (onClick)="onClick.emit('search')"
+    >Search</app-button>
+  </div>
+</div>

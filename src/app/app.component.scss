@@ -1,0 +1,12 @@
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  .img-block {
+    height: 300px;
+    margin-bottom: 50px;
+    background-image: url("/assets/img/bg.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+  }
+}

@@ -1,0 +1,30 @@
+@import "src/assets/styles/variables";
+
+.card-container {
+  position: relative;
+  width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-color: $blue;
+  border-width: 6px;
+  border-top-style: dashed;
+  border-right-style: dashed;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  color: $blue;
+  font-size: 22px;
+  mat-icon {
+    position: absolute;
+    font-size: 55px;
+    color: $mainColorLight;
+    &.top-quote-icon {
+      top: -5px;
+      left: 0;
+      transform: rotate(180deg)
+    }
+    &.bottom-quote-icon {
+      bottom: -5px;
+      right: 0;
+    }
+  }
+}

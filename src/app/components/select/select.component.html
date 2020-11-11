@@ -1,0 +1,15 @@
+<div class="layout-row align-center">
+  <label *ngIf="label">{{label}}</label>
+  <mat-form-field appearance="outline">
+    <div class="selectWrapper">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      <mat-select #select [(value)]="selected" [placeholder]="placeholder" [disabled]="disabled" multiple (selectionChange)="onSelect.emit($event.value)">
+        <mat-option class="selected-all-option" [value]="'all'" #allSelected (click)="toggleAllSelection()">All Categories</mat-option>
+        <mat-option *ngFor="let option of options" [value]="option"
+         (click)="togglePerOne(allSelected.value)">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </div>
+  </mat-form-field>
+</div>

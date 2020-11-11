@@ -1,0 +1,42 @@
+@import "src/assets/styles/variables";
+
+.ch-input {
+  width: 100%;
+
+  label {
+    display: block;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  .input-wrapper {
+    border-radius: 3px;
+    padding: 5px 10px;
+    background-color: $white;
+    border: 1px solid $mainColorLight;
+    transition: all 300ms ease;
+  }
+
+  ::ng-deep input {
+    width: 100%;
+    min-width: 1px;
+    border: none;
+
+    &::placeholder {
+      color: $mainColorLight;
+      cursor: default;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $mainColorLight;
+    }
+    &::-moz-placeholder {
+      color: $mainColorLight;
+    }
+    &:-ms-input-placeholder {
+      color: $mainColorLight;
+    }
+    &:-moz-placeholder {
+      color: $mainColorLight;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+@import "src/assets/styles/variables";
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  line-height: 1;
+  font-weight: 500;
+  outline: none;
+
+  &[disabled]{
+    pointer-events: none;
+    opacity: 0.4;
+    background: $mainColorLight;
+    color: $darkGray;
+  }
+}
+.button{
+  &-main{
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $orange;
+    border: 1px solid inherit;
+    padding: 10px 20px;
+    border-radius: 3px;
+    animation: all 0.3s linear;
+
+    &:hover{
+      background-color: darken($orange, 8%);
+    }
+  }
+}
+
+:host(.switch-button) {
+  &:nth-child(odd) button {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+  &:nth-child(even) button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  button {
+    background-color: white;
+    color: $orange;
+    border: 1px solid $orange;
+  }
+}

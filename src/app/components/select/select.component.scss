@@ -1,0 +1,80 @@
+@import "src/assets/styles/variables";
+
+.selectWrapper {
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+mat-icon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $darkGray;
+  font-size: 22px;
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline {
+    background: $white;
+    .mat-form-field-flex {
+      padding: 0!important;
+    }
+    .mat-form-field-wrapper {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .mat-form-field-outline-start {
+      border-radius: 3px 0 0 3px !important;
+      border-width: 1px !important;
+    }
+    .mat-form-field-outline-end {
+      border-radius: 0 3px 3px 0px !important;
+      border-width: 1px !important;
+    }
+    .mat-form-field-outline-thick {
+      color: $mainColorLight!important;
+      opacity: 1 !important;
+    }
+    &.mat-focused .mat-form-field-outline-thick {
+      color: $mainColorLight!important;
+    }
+    .mat-form-field-outline {
+      color: $mainColorLight!important;
+    }
+    .mat-form-field-infix {
+      padding: 8px 0 8px 10px;
+      border-top: 5px solid transparent !important;
+    }
+    &.mat-form-field-can-float.mat-form-field-should-float {
+      .mat-form-field-label {
+        transform: none;
+        width: initial;
+        opacity: 0;
+      }
+      .mat-form-field-outline-gap {
+        border-top-color: initial !important;
+      }
+    }
+  }
+  .mat-form-field.mat-focused {
+    .mat-form-field-label {
+      color: (0, 0, 0, .6) !important;
+    }
+  }
+  .mat-select-arrow {
+    color: transparent !important;
+  }
+  .selected-all-option {
+    ::ng-deep {
+      mat-pseudo-checkbox {
+        display: none;
+      }
+    }
+  }
+}
